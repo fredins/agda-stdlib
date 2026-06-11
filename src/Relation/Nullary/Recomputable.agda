@@ -29,6 +29,16 @@ open import Relation.Nullary.Recomputable.Core public
 ------------------------------------------------------------------------
 -- Constructions
 
+-- Irrelevant types are Recomputable
+
+irrelevant-recompute : Recomputable (Irrelevant A)
+irrelevant (irrelevant-recompute [ a ]) = a
+
+-- Corollary: so too is ⊥
+
+⊥-recompute : Recomputable ⊥
+⊥-recompute ()
+
 _×-recompute_ : Recomputable A → Recomputable B → Recomputable (A × B)
 (rA ×-recompute rB) p = rA (p .proj₁) , rB (p .proj₂)
 
@@ -41,4 +51,7 @@ _→-recompute_ : (A : Set a) → Recomputable B → Recomputable (A → B)
 ∀-recompute : (B : A → Set b) → (∀ {x} → Recomputable (B x)) → Recomputable (∀ {x} → B x)
 ∀-recompute B rB f = rB f
 
+-- Corollary: negations are Recomputable
 
+¬-recompute : Recomputable (¬ A)
+¬-recompute {A = A} = A →-recompute ⊥-recompute
