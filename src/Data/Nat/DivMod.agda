@@ -4,7 +4,7 @@
 -- Natural number division
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --without-K --safe #-}
 
 module Data.Nat.DivMod where
 
@@ -202,6 +202,12 @@ m/n*n≤m m n = begin
   (m / n) * n + m % n  ≡⟨ +-comm _ (m % n) ⟩
   m % n + (m / n) * n  ≡⟨ m≡m%n+[m/n]*n m n ⟨
   m                    ∎
+
+m<suc[m/n]*n : ∀ m n .{{_ : NonZero n}} → m < suc (m / n) * n
+m<suc[m/n]*n m n = begin-strict
+  m                 ≡⟨ m≡m%n+[m/n]*n m n ⟩
+  m % n + m / n * n <⟨ +-monoˡ-< (m / n * n) (m%n<n m n) ⟩
+  n + m / n * n     ∎
 
 m/n≤m : ∀ m n .{{_ : NonZero n}} → (m / n) ≤ m
 m/n≤m m n = *-cancelʳ-≤ (m / n) m n (begin

@@ -10,7 +10,7 @@
 -- https://agda.readthedocs.io/en/stable/language/with-abstraction.html#with-abstraction-equality
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --without-K --safe #-}
 
 module README.Inspect where
 

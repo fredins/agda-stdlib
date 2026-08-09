@@ -4,7 +4,7 @@
 -- Propositional (intensional) equality
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --without-K --safe #-}
 
 module Relation.Binary.PropositionalEquality where
 
@@ -82,13 +82,13 @@ cong-≡id {f = f} {x} f≡id = begin
   f≡id (f x)                                     ∎
   where open ≡-Reasoning; fx≡x = f≡id x; f²x≡x = f≡id (f x)
 
-module _ (_≟_ : DecidableEquality A) {x y : A} where
+module _ (_≡?_ : DecidableEquality A) {x y : A} where
 
-  ≡-≟-identity : (eq : x ≡ y) → x ≟ y ≡ yes eq
-  ≡-≟-identity eq = dec-yes-irr (x ≟ y) (Decidable⇒UIP.≡-irrelevant _≟_) eq
+  ≡-≡?-identity : (eq : x ≡ y) → x ≡? y ≡ yes eq
+  ≡-≡?-identity eq = dec-yes-irr (x ≡? y) (Decidable⇒UIP.≡-irrelevant _≡?_) eq
 
-  ≢-≟-identity : (x≢y : x ≢ y) → x ≟ y ≡ no x≢y
-  ≢-≟-identity = dec-no (x ≟ y)
+  ≢-≡?-identity : (x≢y : x ≢ y) → x ≡? y ≡ no x≢y
+  ≢-≡?-identity = dec-no (x ≡? y)
 
 
 ------------------------------------------------------------------------
@@ -146,3 +146,17 @@ module _ {A : Set a} {B : A → Set b} where
   Please use the `with ... in eq` syntax described at
   https://agda.readthedocs.io/en/stable/language/with-abstraction.html#with-abstraction-equality instead."
   #-}
+
+-- Version 3.0
+
+≡-≟-identity = ≡-≡?-identity
+{-# WARNING_ON_USAGE ≡-≟-identity
+"Warning: ≡-≟-identity was deprecated in v3.0.
+Please use ≡-≡?-identity instead."
+#-}
+
+≢-≟-identity = ≢-≡?-identity
+{-# WARNING_ON_USAGE ≢-≟-identity
+"Warning: ≢-≟-identity was deprecated in v3.0.
+Please use ≢-≡?-identity instead."
+#-}
