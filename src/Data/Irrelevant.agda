@@ -14,7 +14,6 @@
 module Data.Irrelevant where
 
 open import Level using (Level)
-open import Relation.Nullary.Recomputable.Core using (Recomputable)
 
 private
   variable
@@ -42,13 +41,7 @@ open Irrelevant public
 λ∙⁺ f a = f [ a ]
 {-# INLINE λ∙⁺ #-}
 
--- Irrelevant types are Recomputable
-
-recompute : Recomputable (Irrelevant A)
-irrelevant (recompute [ a ]) = a
-
-------------------------------------------------------------------------
--- Algebraic structure: Functor, Appplicative and Monad
+-- Algebraic structure: Functor, Applicative and Monad-like
 
 map : (A → B) → Irrelevant A → Irrelevant B
 map f [ a ] = [ f a ]
@@ -61,8 +54,8 @@ _<*>_ : Irrelevant (A → B) → Irrelevant A → Irrelevant B
 [ f ] <*> [ a ] = [ f a ]
 
 infixl 1 _>>=_
-_>>=_ : Irrelevant A → (A → Irrelevant B) → Irrelevant B
-[ a ] >>= f = recompute (f a)
+_>>=_ : Irrelevant A → (.A → Irrelevant B) → Irrelevant B
+[ a ] >>= f = f a
 
 ------------------------------------------------------------------------
 -- Other functions

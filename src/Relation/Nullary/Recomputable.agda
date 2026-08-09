@@ -4,12 +4,11 @@
 -- Recomputable types and their algebra as Harrop formulas
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible --safe #-}
+{-# OPTIONS --without-K --safe #-}
 
 module Relation.Nullary.Recomputable where
 
 open import Data.Empty using (⊥)
-open import Data.Irrelevant using (Irrelevant; irrelevant; [_])
 open import Data.Product.Base using (_×_; _,_; proj₁; proj₂)
 open import Level using (Level)
 open import Relation.Nullary.Negation.Core using (¬_)
@@ -28,13 +27,6 @@ open import Relation.Nullary.Recomputable.Core public
 
 ------------------------------------------------------------------------
 -- Constructions
-
--- Irrelevant types are Recomputable
-
-irrelevant-recompute : Recomputable (Irrelevant A)
-irrelevant (irrelevant-recompute [ a ]) = a
-
--- Corollary: so too is ⊥
 
 ⊥-recompute : Recomputable ⊥
 ⊥-recompute ()

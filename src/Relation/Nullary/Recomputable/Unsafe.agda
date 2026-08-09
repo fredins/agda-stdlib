@@ -4,7 +4,7 @@
 -- Recomputable types and their algebra as Harrop formulas
 ------------------------------------------------------------------------
 
-{-# OPTIONS --cubical-compatible --irrelevant-projections #-}
+{-# OPTIONS --without-K --irrelevant-projections #-}
 
 module Relation.Nullary.Recomputable.Unsafe where
 
@@ -33,4 +33,3 @@ open import Relation.Nullary.Recomputable public
 
 irrelevant-recompute : Recomputable (Irrelevant A)
 irrelevant (irrelevant-recompute a) = irrelevant a
-
