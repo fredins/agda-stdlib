@@ -1,0 +1,37 @@
+<!DOCTYPE HTML>
+<html><head><meta charset="utf-8"><title>Relation.Nullary.Recomputable.Unsafe</title><link rel="stylesheet" href="Agda.css"></head><body><pre class="Agda"><a id="1" class="Comment">------------------------------------------------------------------------</a>
+<a id="74" class="Comment">-- The Agda standard library</a>
+<a id="103" class="Comment">--</a>
+<a id="106" class="Comment">-- Recomputable types and their algebra as Harrop formulas</a>
+<a id="165" class="Comment">------------------------------------------------------------------------</a>
+
+<a id="239" class="Symbol">{-#</a> <a id="243" class="Keyword">OPTIONS</a> <a id="251" class="Pragma">--without-K</a> <a id="263" class="Pragma">--irrelevant-projections</a> <a id="288" class="Symbol">#-}</a>
+
+<a id="293" class="Keyword">module</a> <a id="300" href="Relation.Nullary.Recomputable.Unsafe.html" class="Module">Relation.Nullary.Recomputable.Unsafe</a> <a id="337" class="Keyword">where</a>
+
+<a id="344" class="Keyword">open</a> <a id="349" class="Keyword">import</a> <a id="356" href="Data.Empty.html" class="Module">Data.Empty</a> <a id="367" class="Keyword">using</a> <a id="373" class="Symbol">(</a><a id="374" href="Data.Empty.html#905" class="Function">⊥</a><a id="375" class="Symbol">)</a>
+<a id="377" class="Keyword">open</a> <a id="382" class="Keyword">import</a> <a id="389" href="Data.Irrelevant.html" class="Module">Data.Irrelevant</a> <a id="405" class="Keyword">using</a> <a id="411" class="Symbol">(</a><a id="412" href="Data.Irrelevant.html#716" class="Record">Irrelevant</a><a id="422" class="Symbol">;</a> <a id="424" href="Data.Irrelevant.html#780" class="Field">irrelevant</a><a id="434" class="Symbol">;</a> <a id="436" href="Data.Irrelevant.html#767" class="InductiveConstructor Operator">[_]</a><a id="439" class="Symbol">)</a>
+<a id="441" class="Keyword">open</a> <a id="446" class="Keyword">import</a> <a id="453" href="Data.Product.Base.html" class="Module">Data.Product.Base</a> <a id="471" class="Keyword">using</a> <a id="477" class="Symbol">(</a><a id="478" href="Data.Product.Base.html#1743" class="Function Operator">_×_</a><a id="481" class="Symbol">;</a> <a id="483" href="Agda.Builtin.Sigma.html#235" class="InductiveConstructor Operator">_,_</a><a id="486" class="Symbol">;</a> <a id="488" href="Data.Product.Base.html#627" class="Field">proj₁</a><a id="493" class="Symbol">;</a> <a id="495" href="Data.Product.Base.html#641" class="Field">proj₂</a><a id="500" class="Symbol">)</a>
+<a id="502" class="Keyword">open</a> <a id="507" class="Keyword">import</a> <a id="514" href="Level.html" class="Module">Level</a> <a id="520" class="Keyword">using</a> <a id="526" class="Symbol">(</a><a id="527" href="Agda.Primitive.html#742" class="Postulate">Level</a><a id="532" class="Symbol">)</a>
+<a id="534" class="Keyword">open</a> <a id="539" class="Keyword">import</a> <a id="546" href="Relation.Nullary.Negation.Core.html" class="Module">Relation.Nullary.Negation.Core</a> <a id="577" class="Keyword">using</a> <a id="583" class="Symbol">(</a><a id="584" href="Relation.Nullary.Negation.Core.html#660" class="Function Operator">¬_</a><a id="586" class="Symbol">)</a>
+
+<a id="589" class="Keyword">private</a>
+  <a id="599" class="Keyword">variable</a>
+    <a id="612" href="Relation.Nullary.Recomputable.Unsafe.html#612" class="Generalizable">a</a> <a id="614" href="Relation.Nullary.Recomputable.Unsafe.html#614" class="Generalizable">b</a> <a id="616" class="Symbol">:</a> <a id="618" href="Agda.Primitive.html#742" class="Postulate">Level</a>
+    <a id="628" href="Relation.Nullary.Recomputable.Unsafe.html#628" class="Generalizable">A</a> <a id="630" class="Symbol">:</a> <a id="632" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="636" href="Relation.Nullary.Recomputable.Unsafe.html#612" class="Generalizable">a</a>
+    <a id="642" href="Relation.Nullary.Recomputable.Unsafe.html#642" class="Generalizable">B</a> <a id="644" class="Symbol">:</a> <a id="646" href="Agda.Primitive.html#388" class="Primitive">Set</a> <a id="650" href="Relation.Nullary.Recomputable.Unsafe.html#614" class="Generalizable">b</a>
+
+<a id="653" class="Comment">------------------------------------------------------------------------</a>
+<a id="726" class="Comment">-- Re-export</a>
+
+<a id="740" class="Keyword">open</a> <a id="745" class="Keyword">import</a> <a id="752" href="Relation.Nullary.Recomputable.html" class="Module">Relation.Nullary.Recomputable</a> <a id="782" class="Keyword">public</a>
+
+
+<a id="791" class="Comment">------------------------------------------------------------------------</a>
+<a id="864" class="Comment">-- Constructions</a>
+
+<a id="882" class="Comment">-- Irrelevant types are Recomputable</a>
+
+<a id="irrelevant-recompute"></a><a id="920" href="Relation.Nullary.Recomputable.Unsafe.html#920" class="Function">irrelevant-recompute</a> <a id="941" class="Symbol">:</a> <a id="943" href="Relation.Nullary.Recomputable.Core.html#976" class="Function">Recomputable</a> <a id="956" class="Symbol">(</a><a id="957" href="Data.Irrelevant.html#716" class="Record">Irrelevant</a> <a id="968" href="Relation.Nullary.Recomputable.Unsafe.html#628" class="Generalizable">A</a><a id="969" class="Symbol">)</a>
+<a id="971" href="Data.Irrelevant.html#780" class="Field">irrelevant</a> <a id="982" class="Symbol">(</a><a id="983" href="Relation.Nullary.Recomputable.Unsafe.html#920" class="Function">irrelevant-recompute</a> <a id="1004" href="Relation.Nullary.Recomputable.Unsafe.html#1004" class="Bound">a</a><a id="1005" class="Symbol">)</a> <a id="1007" class="Symbol">=</a> <a id="1009" href="Data.Irrelevant.html#780" class="Field">irrelevant</a> <a id="1020" href="Relation.Nullary.Recomputable.Unsafe.html#1004" class="Bound">a</a>
+</pre></body></html>
